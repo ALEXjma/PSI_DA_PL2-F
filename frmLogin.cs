@@ -7,8 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using iTasks.Auth;
 using iTasks.Models;
+using iTasks.Auth;
 
 namespace iTasks
 {

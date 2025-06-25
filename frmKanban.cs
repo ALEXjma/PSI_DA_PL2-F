@@ -7,9 +7,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using iTasks.Models;
-using iTasks.Data;
 using System.Data.Entity;
+using iTasks.Data;
+using iTasks.Models;
 
 namespace iTasks
 {
@@ -36,6 +36,7 @@ namespace iTasks
             tarefasTerminadasToolStripMenuItem.Click += tarefasTerminadasToolStripMenuItem_Click;
             tarefasEmCursoToolStripMenuItem.Click += tarefasEmCursoToolStripMenuItem_Click;
             sairToolStripMenuItem.Click += sairToolStripMenuItem_Click;
+            exportarParaCSVToolStripMenuItem.Click += exportarParaCSVToolStripMenuItem_Click;
         }
 
         private void frmKanban_Load(object sender, EventArgs e)
@@ -360,6 +361,52 @@ namespace iTasks
                 }
                 int totalEstimatedDays = totalEstimatedHours > 0.1 ? (int)Math.Ceiling(totalEstimatedHours / 24.0) : 0;
                 MessageBox.Show($"Tempo estimado para concluir todas as tarefas ToDo: {totalEstimatedHours:F1} horas (~{totalEstimatedDays} dias)", "Previsão de Conclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void exportarParaCSVToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!(SessionManager.CurrentUser is Gestor gestor))
+            {
+                MessageBox.Show("Apenas gestores podem exportar tarefas concluídas.");
+                return;
+            }
+            using (var db = new iTasksDbContext())
+            {
+                var tarefas = db.Tarefas
+                    .Where(t => t.IdGestor == gestor.Id && t.EstadoAtual == CurrentStatus.Done)
+                    .Include(t => t.Programador)
+                    .Include(t => t.TipoTarefa)
+                    .ToList();
+                if (!tarefas.Any())
+                {
+                    MessageBox.Show("Não existem tarefas concluídas para exportar.");
+                    return;
+                }
+                var lines = new List<string>();
+                // Header
+                lines.Add("Programador;Descricao;DataPrevistaInicio;DataPrevistaFim;TipoTarefa;DataRealInicio;DataRealFim");
+                foreach (var t in tarefas)
+                {
+                    string line = string.Join(";",
+                        t.Programador?.Nome ?? "",
+                        t.Descricao?.Replace(";", ",") ?? "",
+                        t.DataPrevistaInicio.ToString("yyyy-MM-dd"),
+                        t.DataPrevistaFim.ToString("yyyy-MM-dd"),
+                        t.TipoTarefa?.Nome ?? "",
+                        t.DataRealInicio?.ToString("yyyy-MM-dd") ?? "",
+                        t.DataRealFim?.ToString("yyyy-MM-dd") ?? ""
+                    );
+                    lines.Add(line);
+                }
+                using (var sfd = new SaveFileDialog { Filter = "CSV files (*.csv)|*.csv", FileName = "TarefasConcluidas.csv" })
+                {
+                    if (sfd.ShowDialog() == DialogResult.OK)
+                    {
+                        System.IO.File.WriteAllLines(sfd.FileName, lines, Encoding.UTF8);
+                        MessageBox.Show("Exportação concluída com sucesso!", "Exportar CSV", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
             }
         }
     }
