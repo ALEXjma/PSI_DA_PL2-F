@@ -56,6 +56,7 @@
             this.btFechar = new System.Windows.Forms.Button();
             this.txtStoryPoints = new System.Windows.Forms.TextBox();
             this.label12 = new System.Windows.Forms.Label();
+            this.btEliminar = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // txtId
@@ -324,11 +325,22 @@
             this.label12.TabIndex = 30;
             this.label12.Text = "StoryPoints:";
             // 
+            // btEliminar
+            // 
+            this.btEliminar.Location = new System.Drawing.Point(11, 390);
+            this.btEliminar.Margin = new System.Windows.Forms.Padding(4);
+            this.btEliminar.Name = "btEliminar";
+            this.btEliminar.Size = new System.Drawing.Size(139, 28);
+            this.btEliminar.TabIndex = 31;
+            this.btEliminar.Text = "Eliminar";
+            this.btEliminar.UseVisualStyleBackColor = true;
+            // 
             // frmDetalhesTarefa
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(767, 450);
+            this.Controls.Add(this.btEliminar);
             this.Controls.Add(this.txtStoryPoints);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.btFechar);
@@ -397,5 +409,6 @@
         private System.Windows.Forms.Button btFechar;
         private System.Windows.Forms.TextBox txtStoryPoints;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Button btEliminar;
     }
 }

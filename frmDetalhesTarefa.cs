@@ -24,6 +24,7 @@ namespace iTasks
             this.tarefaId = tarefaId;
             Load += frmDetalhesTarefa_Load;
             btGravar.Click += btGravar_Click;
+            btEliminar.Click += btEliminar_Click;
             btFechar.Click += (s, e) => this.Close();
             // Permitir fechar o formulário com a tecla ESC
             this.KeyPreview = true;
@@ -32,10 +33,22 @@ namespace iTasks
 
         private void frmDetalhesTarefa_Load(object sender, EventArgs e)
         {
+            // Definir modo de apenas leitura se o utilizador não for gestor
+            isReadOnly = !(SessionManager.CurrentUser is Gestor);
             using (var db = new iTasksDbContext())
             {
-                // Load Programadores para a seleção do Manager
-                cbProgramador.DataSource = db.Programadores.ToList();
+                // Load Programadores
+                var allProgs = db.Programadores.ToList();
+                List<Programador> progsToShow;
+                if (!isReadOnly && SessionManager.CurrentUser is Gestor gestor)
+                {
+                    progsToShow = allProgs.Where(p => p.IdGestor == gestor.Id).ToList();
+                }
+                else
+                {
+                    progsToShow = allProgs;
+                }
+                cbProgramador.DataSource = progsToShow;
                 cbProgramador.DisplayMember = "Nome";
                 cbProgramador.ValueMember = "Id";
                 // Load Tipos de Tarefa
@@ -52,6 +65,11 @@ namespace iTasks
                         MessageBox.Show("Tarefa não encontrada.");
                         Close();
                         return;
+                    }
+                    if (!isReadOnly && SessionManager.CurrentUser is Gestor _gestor && tarefa.IdGestor != _gestor.Id) {
+                        // Definir como apenas leitura se a tarefa não pertence ao gestor atual
+                        isReadOnly = true;
+                        cbProgramador.DataSource = allProgs;
                     }
                     txtId.Text = tarefa.Id.ToString();
                     txtDesc.Text = tarefa.Descricao;
@@ -83,8 +101,6 @@ namespace iTasks
                     dtFim.Value = DateTime.Now.AddDays(1);
                 }
             }
-            // Definir modo de apenas leitura se o utilizador não for gestor
-            isReadOnly = !(SessionManager.CurrentUser is Gestor);
             SetReadOnlyMode(isReadOnly);
         }
 
@@ -98,6 +114,7 @@ namespace iTasks
             dtFim.Enabled = !readOnly;
             txtStoryPoints.ReadOnly = readOnly;
             btGravar.Enabled = !readOnly;
+            btEliminar.Enabled = !readOnly;
         }
 
         private void btGravar_Click(object sender, EventArgs e)
@@ -155,6 +172,33 @@ namespace iTasks
                     db.Tarefas.Add(tarefa);
                 db.SaveChanges();
                 MessageBox.Show("Tarefa gravada com sucesso.");
+                this.Close();
+            }
+        }
+
+        private void btEliminar_Click(object sender, EventArgs e)
+        {
+            if (!(SessionManager.CurrentUser is Gestor gestor))
+            {
+                MessageBox.Show("Apenas gestores podem eliminar tarefas.");
+                return;
+            }
+            if (!tarefaId.HasValue)
+            {
+                MessageBox.Show("Nenhuma tarefa selecionada para eliminar.");
+                return;
+            }
+            using (var db = new iTasksDbContext())
+            {
+                var tarefa = db.Tarefas.Find(tarefaId.Value);
+                if (tarefa == null)
+                {
+                    MessageBox.Show("Tarefa não encontrada.");
+                    return;
+                }
+                db.Tarefas.Remove(tarefa);
+                db.SaveChanges();
+                MessageBox.Show("Tarefa eliminada com sucesso.");
                 this.Close();
             }
         }
