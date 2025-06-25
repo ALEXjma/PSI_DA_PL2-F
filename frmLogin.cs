@@ -17,12 +17,12 @@ namespace iTasks
         public frmLogin()
         {
             InitializeComponent();
-            FormClosed += frmLoginFormCloed;
+            FormClosed += frmLoginFormClosed;
             btLogin.Click += btLogin_Click;
             registroToolStripMenuItem.Click += registroToolStripMenuItem_Click;
         }
 
-        private void frmLoginFormCloed(object sender, FormClosedEventArgs e)
+        private void frmLoginFormClosed(object sender, FormClosedEventArgs e)
         {
             Application.Exit();
         }
@@ -50,8 +50,9 @@ namespace iTasks
                     SessionManager.CurrentUser = adminUser;
                     // Abrir o formulário de gestão de utilizadores
                     frmGereUtilizadores frm = new frmGereUtilizadores();
-                    frm.Show();
+                    frm.FormClosed += (s, args) => { this.Show(); };
                     this.Hide();
+                    frm.Show();
                     return;
                 }
 

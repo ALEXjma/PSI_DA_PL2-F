@@ -18,7 +18,6 @@ namespace iTasks
         {
             InitializeComponent();
             Load += frmGereTiposTarefas_Load;
-            FormClosed += frmFormClosed;
             // Create
             btNovo.Click += btNovo_Click;
             // Read
@@ -32,11 +31,6 @@ namespace iTasks
         private void frmGereTiposTarefas_Load(object sender, EventArgs e)
         {
             LoadTiposTarefa();
-        }
-
-        private void frmFormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
         }
 
         private void LoadTiposTarefa()

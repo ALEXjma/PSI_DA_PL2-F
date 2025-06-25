@@ -20,7 +20,6 @@ namespace iTasks
         {
             InitializeComponent();
             Load += frmGereUtilizadores_Load;
-            FormClosed += frmGereUtilizadores_FormClosed;
             // Create
             btNovoGestor.Click += btNovoGestor_Click;
             btNovoProg.Click += btNovoProg_Click;
@@ -40,11 +39,6 @@ namespace iTasks
             cbDepartamento.DataSource = Enum.GetValues(typeof(Department));
             cbNivelProg.DataSource = Enum.GetValues(typeof(ExperienceLevel));
             LoadUsers();
-        }
-
-        private void frmGereUtilizadores_FormClosed(object sender, FormClosedEventArgs e)
-        {
-            Application.Exit();
         }
 
         private void LoadUsers()
