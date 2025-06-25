@@ -63,6 +63,12 @@ namespace iTasks
 
         private void btGravar_Click(object sender, EventArgs e)
         {
+            // Validar se a descrição não está vazia
+            if (string.IsNullOrWhiteSpace(txtDesc.Text))
+            {
+                MessageBox.Show("A descrição não pode estar vazia.");
+                return;
+            }
             using (var db = new iTasksDbContext())
             {
                 int.TryParse(txtId.Text, out int id);

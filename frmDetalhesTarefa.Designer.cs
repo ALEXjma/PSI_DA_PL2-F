@@ -91,11 +91,12 @@
             // 
             // cbProgramador
             // 
+            this.cbProgramador.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbProgramador.FormattingEnabled = true;
             this.cbProgramador.Location = new System.Drawing.Point(176, 203);
             this.cbProgramador.Margin = new System.Windows.Forms.Padding(4);
             this.cbProgramador.Name = "cbProgramador";
-            this.cbProgramador.Size = new System.Drawing.Size(413, 24);
+            this.cbProgramador.Size = new System.Drawing.Size(179, 24);
             this.cbProgramador.TabIndex = 3;
             // 
             // txtOrdem
@@ -146,11 +147,12 @@
             // 
             // cbTipoTarefa
             // 
+            this.cbTipoTarefa.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbTipoTarefa.FormattingEnabled = true;
             this.cbTipoTarefa.Location = new System.Drawing.Point(176, 170);
             this.cbTipoTarefa.Margin = new System.Windows.Forms.Padding(4);
             this.cbTipoTarefa.Name = "cbTipoTarefa";
-            this.cbTipoTarefa.Size = new System.Drawing.Size(413, 24);
+            this.cbTipoTarefa.Size = new System.Drawing.Size(179, 24);
             this.cbTipoTarefa.TabIndex = 2;
             // 
             // dtInicio

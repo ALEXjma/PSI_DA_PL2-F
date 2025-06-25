@@ -124,6 +124,12 @@ namespace iTasks
                 MessageBox.Show("Apenas gestores podem gravar tarefas.");
                 return;
             }
+            // Validar se a descrição não está vazia
+            if (string.IsNullOrWhiteSpace(txtDesc.Text))
+            {
+                MessageBox.Show("A descrição não pode estar vazia.");
+                return;
+            }
             using (var db = new iTasksDbContext())
             {
                 Tarefa tarefa;

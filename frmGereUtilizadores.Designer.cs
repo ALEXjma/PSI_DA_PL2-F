@@ -212,9 +212,11 @@
             this.txtPasswordGestor.Name = "txtPasswordGestor";
             this.txtPasswordGestor.Size = new System.Drawing.Size(267, 22);
             this.txtPasswordGestor.TabIndex = 38;
+            this.txtPasswordGestor.UseSystemPasswordChar = true;
             // 
             // cbDepartamento
             // 
+            this.cbDepartamento.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbDepartamento.FormattingEnabled = true;
             this.cbDepartamento.Location = new System.Drawing.Point(392, 250);
             this.cbDepartamento.Margin = new System.Windows.Forms.Padding(4);
@@ -307,6 +309,7 @@
             // 
             // cbGestorProg
             // 
+            this.cbGestorProg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbGestorProg.FormattingEnabled = true;
             this.cbGestorProg.Location = new System.Drawing.Point(392, 303);
             this.cbGestorProg.Margin = new System.Windows.Forms.Padding(4);
@@ -341,9 +344,11 @@
             this.txtPasswordProg.Name = "txtPasswordProg";
             this.txtPasswordProg.Size = new System.Drawing.Size(267, 22);
             this.txtPasswordProg.TabIndex = 38;
+            this.txtPasswordProg.UseSystemPasswordChar = true;
             // 
             // cbNivelProg
             // 
+            this.cbNivelProg.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbNivelProg.FormattingEnabled = true;
             this.cbNivelProg.Location = new System.Drawing.Point(392, 250);
             this.cbNivelProg.Margin = new System.Windows.Forms.Padding(4);
