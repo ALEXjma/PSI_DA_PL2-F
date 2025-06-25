@@ -36,7 +36,7 @@
             // btFechar
             // 
             this.btFechar.Location = new System.Drawing.Point(1245, 511);
-            this.btFechar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btFechar.Margin = new System.Windows.Forms.Padding(4);
             this.btFechar.Name = "btFechar";
             this.btFechar.Size = new System.Drawing.Size(139, 28);
             this.btFechar.TabIndex = 32;
@@ -48,7 +48,7 @@
             this.gvTarefasConcluidas.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gvTarefasConcluidas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvTarefasConcluidas.Location = new System.Drawing.Point(16, 15);
-            this.gvTarefasConcluidas.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gvTarefasConcluidas.Margin = new System.Windows.Forms.Padding(4);
             this.gvTarefasConcluidas.Name = "gvTarefasConcluidas";
             this.gvTarefasConcluidas.RowHeadersWidth = 51;
             this.gvTarefasConcluidas.Size = new System.Drawing.Size(1368, 486);
@@ -61,7 +61,9 @@
             this.ClientSize = new System.Drawing.Size(1403, 554);
             this.Controls.Add(this.btFechar);
             this.Controls.Add(this.gvTarefasConcluidas);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "frmConsultarTarefasConcluidas";
             this.Text = "frmConsultarTarefasConcluidas";
             ((System.ComponentModel.ISupportInitialize)(this.gvTarefasConcluidas)).EndInit();

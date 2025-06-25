@@ -38,7 +38,7 @@
             this.gvTarefasEmCurso.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.gvTarefasEmCurso.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.gvTarefasEmCurso.Location = new System.Drawing.Point(16, 15);
-            this.gvTarefasEmCurso.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.gvTarefasEmCurso.Margin = new System.Windows.Forms.Padding(4);
             this.gvTarefasEmCurso.Name = "gvTarefasEmCurso";
             this.gvTarefasEmCurso.RowHeadersWidth = 51;
             this.gvTarefasEmCurso.Size = new System.Drawing.Size(1368, 486);
@@ -47,7 +47,7 @@
             // btFechar
             // 
             this.btFechar.Location = new System.Drawing.Point(1245, 511);
-            this.btFechar.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btFechar.Margin = new System.Windows.Forms.Padding(4);
             this.btFechar.Name = "btFechar";
             this.btFechar.Size = new System.Drawing.Size(139, 28);
             this.btFechar.TabIndex = 30;
@@ -61,7 +61,9 @@
             this.ClientSize = new System.Drawing.Size(1400, 554);
             this.Controls.Add(this.btFechar);
             this.Controls.Add(this.gvTarefasEmCurso);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "frmConsultaTarefasEmCurso";
             this.Text = "frmConsultaTarefasEmCurso";
             ((System.ComponentModel.ISupportInitialize)(this.gvTarefasEmCurso)).EndInit();

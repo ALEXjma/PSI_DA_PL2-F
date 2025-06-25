@@ -25,6 +25,7 @@ namespace iTasks
             btSetDone.Click += btSetDone_Click;
             btSetTodo.Click += btSetTodo_Click;
             btNova.Click += btNova_Click;
+            btPrevisao.Click += btPrevisao_Click;
             // Detalhes das tarefas
             lstTodo.DoubleClick += lstTask_DoubleClick;
             lstDoing.DoubleClick += lstTask_DoubleClick;
@@ -57,6 +58,7 @@ namespace iTasks
                 btSetDone.Enabled = false;
                 btSetTodo.Enabled = false;
                 btNova.Enabled = true;
+                btPrevisao.Enabled = true;
                 // Toolstrip menu items
                 gerirUtilizadoresToolStripMenuItem.Enabled = true;
                 gerirTiposDeTarefasToolStripMenuItem.Enabled = true;
@@ -70,6 +72,7 @@ namespace iTasks
                 btSetDone.Enabled = true;
                 btSetTodo.Enabled = true;
                 btNova.Enabled = false;
+                btPrevisao.Enabled = false;
                 // Toolstrip menu items
                 gerirUtilizadoresToolStripMenuItem.Enabled = false;
                 gerirTiposDeTarefasToolStripMenuItem.Enabled = false;
@@ -305,6 +308,58 @@ namespace iTasks
             if (resultado == DialogResult.Yes)
             {
                 Application.Exit();
+            }
+        }
+
+        private void btPrevisao_Click(object sender, EventArgs e)
+        {
+            if (!(SessionManager.CurrentUser is Gestor gestor))
+            {
+                MessageBox.Show("Apenas gestores podem ver a previsão de conclusão.");
+                return;
+            }
+            using (var db = new iTasksDbContext())
+            {
+                // ToDo tasks para este manager
+                var todos = db.Tarefas.Where(t => t.IdGestor == gestor.Id && t.EstadoAtual == CurrentStatus.ToDo).ToList();
+                // Done tasks para este manager
+                var done = db.Tarefas.Where(t => t.IdGestor == gestor.Id && t.EstadoAtual == CurrentStatus.Done && t.DataRealInicio != null && t.DataRealFim != null).ToList();
+                if (!todos.Any())
+                {
+                    MessageBox.Show("Não existem tarefas ToDo para previsão.");
+                    return;
+                }
+                if (!done.Any())
+                {
+                    MessageBox.Show("Não existem tarefas concluídas para calcular médias.");
+                    return;
+                }
+                // Dicionário: StoryPoints -> Lista de tempos de execução (em horas)
+                var spToTimes = done
+                    .GroupBy(t => t.StoryPoints)
+                    .ToDictionary(
+                        g => g.Key,
+                        g => g.Select(t => (t.DataRealFim.Value - t.DataRealInicio.Value).TotalHours).ToList()
+                    );
+                double totalEstimatedHours = 0;
+                foreach (var tarefa in todos)
+                {
+                    int sp = tarefa.StoryPoints;
+                    double avgTime;
+                    if (spToTimes.ContainsKey(sp))
+                    {
+                        avgTime = spToTimes[sp].Average();
+                    }
+                    else
+                    {
+                        // Encontrar o StoryPoint mais próximo com lista de tempos associada
+                        int? closest = spToTimes.Keys.OrderBy(x => Math.Abs(x - sp)).FirstOrDefault();
+                        avgTime = closest.HasValue ? spToTimes[closest.Value].Average() : 0;
+                    }
+                    totalEstimatedHours += avgTime;
+                }
+                int totalEstimatedDays = totalEstimatedHours > 0.1 ? (int)Math.Ceiling(totalEstimatedHours / 24.0) : 0;
+                MessageBox.Show($"Tempo estimado para concluir todas as tarefas ToDo: {totalEstimatedHours:F1} horas (~{totalEstimatedDays} dias)", "Previsão de Conclusão", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
     }

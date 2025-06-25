@@ -136,7 +136,7 @@
             this.listagensToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1257, 30);
+            this.menuStrip1.Size = new System.Drawing.Size(1257, 28);
             this.menuStrip1.TabIndex = 4;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -146,7 +146,7 @@
             this.sairToolStripMenuItem,
             this.exportarParaCSVToolStripMenuItem});
             this.ficheiroToolStripMenuItem.Name = "ficheiroToolStripMenuItem";
-            this.ficheiroToolStripMenuItem.Size = new System.Drawing.Size(75, 26);
+            this.ficheiroToolStripMenuItem.Size = new System.Drawing.Size(75, 24);
             this.ficheiroToolStripMenuItem.Text = "Ficheiro";
             // 
             // sairToolStripMenuItem
@@ -167,7 +167,7 @@
             this.gerirUtilizadoresToolStripMenuItem,
             this.gerirTiposDeTarefasToolStripMenuItem});
             this.utilizadoresToolStripMenuItem.Name = "utilizadoresToolStripMenuItem";
-            this.utilizadoresToolStripMenuItem.Size = new System.Drawing.Size(160, 26);
+            this.utilizadoresToolStripMenuItem.Size = new System.Drawing.Size(160, 24);
             this.utilizadoresToolStripMenuItem.Text = "Gestão da Aplicação";
             // 
             // gerirUtilizadoresToolStripMenuItem
@@ -188,7 +188,7 @@
             this.tarefasTerminadasToolStripMenuItem,
             this.tarefasEmCursoToolStripMenuItem});
             this.listagensToolStripMenuItem.Name = "listagensToolStripMenuItem";
-            this.listagensToolStripMenuItem.Size = new System.Drawing.Size(84, 26);
+            this.listagensToolStripMenuItem.Size = new System.Drawing.Size(84, 24);
             this.listagensToolStripMenuItem.Text = "Listagens";
             // 
             // tarefasTerminadasToolStripMenuItem
@@ -298,8 +298,10 @@
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.MainMenuStrip = this.menuStrip1;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "frmKanban";
             this.Text = "frmKanban";
             this.groupBox1.ResumeLayout(false);

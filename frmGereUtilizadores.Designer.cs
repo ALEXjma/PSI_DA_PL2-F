@@ -36,6 +36,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.lstListaGestores = new System.Windows.Forms.ListBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btNovoGestor = new System.Windows.Forms.Button();
             this.btEliminarGestor = new System.Windows.Forms.Button();
             this.chkGereUtilizadores = new System.Windows.Forms.CheckBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -45,6 +46,7 @@
             this.txtUsernameGestor = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.btNovoProg = new System.Windows.Forms.Button();
             this.btEliminarProg = new System.Windows.Forms.Button();
             this.label11 = new System.Windows.Forms.Label();
             this.cbGestorProg = new System.Windows.Forms.ComboBox();
@@ -61,8 +63,6 @@
             this.label9 = new System.Windows.Forms.Label();
             this.txtNomeProg = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
-            this.btNovoGestor = new System.Windows.Forms.Button();
-            this.btNovoProg = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.groupBox3.SuspendLayout();
@@ -166,6 +166,15 @@
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Gestores";
             // 
+            // btNovoGestor
+            // 
+            this.btNovoGestor.Location = new System.Drawing.Point(392, 383);
+            this.btNovoGestor.Name = "btNovoGestor";
+            this.btNovoGestor.Size = new System.Drawing.Size(133, 28);
+            this.btNovoGestor.TabIndex = 42;
+            this.btNovoGestor.Text = "Novo";
+            this.btNovoGestor.UseVisualStyleBackColor = true;
+            // 
             // btEliminarGestor
             // 
             this.btEliminarGestor.Location = new System.Drawing.Point(531, 383);
@@ -267,6 +276,15 @@
             this.groupBox3.TabIndex = 39;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Programadores";
+            // 
+            // btNovoProg
+            // 
+            this.btNovoProg.Location = new System.Drawing.Point(392, 383);
+            this.btNovoProg.Name = "btNovoProg";
+            this.btNovoProg.Size = new System.Drawing.Size(133, 28);
+            this.btNovoProg.TabIndex = 42;
+            this.btNovoProg.Text = "Novo";
+            this.btNovoProg.UseVisualStyleBackColor = true;
             // 
             // btEliminarProg
             // 
@@ -422,24 +440,6 @@
             this.label10.TabIndex = 35;
             this.label10.Text = "Nome:";
             // 
-            // btNovoGestor
-            // 
-            this.btNovoGestor.Location = new System.Drawing.Point(392, 383);
-            this.btNovoGestor.Name = "btNovoGestor";
-            this.btNovoGestor.Size = new System.Drawing.Size(133, 28);
-            this.btNovoGestor.TabIndex = 42;
-            this.btNovoGestor.Text = "Novo";
-            this.btNovoGestor.UseVisualStyleBackColor = true;
-            // 
-            // btNovoProg
-            // 
-            this.btNovoProg.Location = new System.Drawing.Point(392, 383);
-            this.btNovoProg.Name = "btNovoProg";
-            this.btNovoProg.Size = new System.Drawing.Size(133, 28);
-            this.btNovoProg.TabIndex = 42;
-            this.btNovoProg.Text = "Novo";
-            this.btNovoProg.UseVisualStyleBackColor = true;
-            // 
             // frmGereUtilizadores
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -447,7 +447,9 @@
             this.ClientSize = new System.Drawing.Size(1401, 620);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "frmGereUtilizadores";
             this.Text = "frmListaUtilizadores";
             this.groupBox1.ResumeLayout(false);

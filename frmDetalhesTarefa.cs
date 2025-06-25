@@ -128,7 +128,18 @@ namespace iTasks
                 }
                 tarefa.Descricao = txtDesc.Text.Trim();
                 tarefa.IdProgramador = (int)cbProgramador.SelectedValue;
-                tarefa.OrdemExecucao = int.TryParse(txtOrdem.Text, out int ordem) ? ordem : 1;
+                int ordem;
+                if (int.TryParse(txtOrdem.Text, out ordem) && ordem > 0)
+                {
+                    tarefa.OrdemExecucao = ordem;
+                }
+                else
+                {
+                    // Usar a proxima ordem de execução disponível para o programador selecionado por padrão
+                    int progId = (int)cbProgramador.SelectedValue;
+                    int maxOrdem = db.Tarefas.Where(t => t.IdProgramador == progId).Select(t => (int?)t.OrdemExecucao).Max() ?? 0;
+                    tarefa.OrdemExecucao = maxOrdem + 1;
+                }
                 tarefa.IdTipoTarefa = (int)cbTipoTarefa.SelectedValue;
                 tarefa.DataPrevistaInicio = dtInicio.Value;
                 tarefa.DataPrevistaFim = dtFim.Value;

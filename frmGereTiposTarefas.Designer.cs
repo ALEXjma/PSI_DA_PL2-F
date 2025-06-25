@@ -141,7 +141,9 @@
             this.Controls.Add(this.txtId);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "frmGereTiposTarefas";
             this.Text = "frmGereTiposTarefas";
             this.groupBox1.ResumeLayout(false);

@@ -40,6 +40,9 @@ namespace iTasks
                     {
                         Programador = t.Programador.Nome,
                         t.Descricao,
+                        TipoTarefa = t.TipoTarefa.Nome,
+                        t.OrdemExecucao,
+                        t.StoryPoints,
                         t.EstadoAtual,
                         t.DataPrevistaInicio,
                         t.DataPrevistaFim,
