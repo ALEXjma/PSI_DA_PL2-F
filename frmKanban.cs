@@ -32,12 +32,14 @@ namespace iTasks
             // Toolstrip menu items
             gerirUtilizadoresToolStripMenuItem.Click += gerirUtilizadoresToolStripMenuItem_Click;
             gerirTiposDeTarefasToolStripMenuItem.Click += gerirTiposDeTarefasToolStripMenuItem_Click;
+            tarefasTerminadasToolStripMenuItem.Click += tarefasTerminadasToolStripMenuItem_Click;
+            tarefasEmCursoToolStripMenuItem.Click += tarefasEmCursoToolStripMenuItem_Click;
             sairToolStripMenuItem.Click += sairToolStripMenuItem_Click;
         }
 
         private void frmKanban_Load(object sender, EventArgs e)
         {
-            // Show logged-in user's name
+            // Mostrar o nome do utilizador atual
             if (SessionManager.CurrentUser != null)
             {
                 label1.Text = $"Bem vindo: {SessionManager.CurrentUser.Nome}";
@@ -47,26 +49,32 @@ namespace iTasks
                 label1.Text = "Bem vindo: <Desconhecido>";
             }
 
-            // Adapt UI to user type
-            if (SessionManager.CurrentUser is Gestor)
+            // Adaptar o UI conforme o tipo de utilizador
+            if (SessionManager.CurrentUser is Gestor) // Gestor
             {
-                btNova.Enabled = true;
-                gerirUtilizadoresToolStripMenuItem.Enabled = true;
-                gerirTiposDeTarefasToolStripMenuItem.Enabled = true;
-                exportarParaCSVToolStripMenuItem.Enabled = true;
+                // Botões principais
                 btSetDoing.Enabled = false;
                 btSetDone.Enabled = false;
                 btSetTodo.Enabled = false;
+                btNova.Enabled = true;
+                // Toolstrip menu items
+                gerirUtilizadoresToolStripMenuItem.Enabled = true;
+                gerirTiposDeTarefasToolStripMenuItem.Enabled = true;
+                tarefasEmCursoToolStripMenuItem.Enabled = true;
+                exportarParaCSVToolStripMenuItem.Enabled = true;
             }
-            else if (SessionManager.CurrentUser is Programador)
+            else if (SessionManager.CurrentUser is Programador) // Programador
             {
-                btNova.Enabled = false;
-                gerirUtilizadoresToolStripMenuItem.Enabled = false;
-                gerirTiposDeTarefasToolStripMenuItem.Enabled = false;
-                exportarParaCSVToolStripMenuItem.Enabled = false;
+                // Botões principais
                 btSetDoing.Enabled = true;
                 btSetDone.Enabled = true;
                 btSetTodo.Enabled = true;
+                btNova.Enabled = false;
+                // Toolstrip menu items
+                gerirUtilizadoresToolStripMenuItem.Enabled = false;
+                gerirTiposDeTarefasToolStripMenuItem.Enabled = false;
+                tarefasEmCursoToolStripMenuItem.Enabled = false;
+                exportarParaCSVToolStripMenuItem.Enabled = false;
             }
             LoadKanbanTasks();
         }
@@ -274,6 +282,21 @@ namespace iTasks
             frm.Show();
         }
 
+        private void tarefasTerminadasToolStripMenuItem_Click(Object sender, EventArgs e)
+        {
+            frmConsultarTarefasConcluidas frm = new frmConsultarTarefasConcluidas();
+            frm.FormClosed += (s, args) => { this.Show(); };
+            this.Hide();
+            frm.Show();
+        }
+
+        private void tarefasEmCursoToolStripMenuItem_Click(Object sender, EventArgs e)
+        {
+            frmConsultaTarefasEmCurso frm = new frmConsultaTarefasEmCurso();
+            frm.FormClosed += (s, args) => { this.Show(); };
+            this.Hide();
+            frm.Show();
+        }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
         {
